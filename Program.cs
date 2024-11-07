@@ -8,6 +8,12 @@ using System.IO; // Asegúrate de tener este using para usar Path y Directory
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Configuración de Kestrel para escuchar en todas las interfaces
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenAnyIP(5018); // Cambia el puerto si es necesario
+});
+
 // Carga las variables de entorno desde .env
 var envPath = Path.Combine(Directory.GetCurrentDirectory(), ".env");
 MyDotEnv.Load(envPath); // Usa tu clase personalizada para cargar variables del archivo .env
